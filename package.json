@@ -1,0 +1,32 @@
+{
+  "name": "lookup-practice",
+  "version": "1.0.0",
+  "description": "Sample Gladly node.js Lookup Adapters with Actions",
+  "license": "ISC",
+  "author": "elizaw",
+  "homepage": "https://github.com/gladly/lookup-practice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "csvtojson": "^2.0.10",
+    "dayjs": "^1.10.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "hmac-express": "^1.4.0",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "oauth-1.0a": "^2.2.6",
+    "oauth-signature": "^1.5.0",
+    "promise": "^8.1.0",
+    "query-string": "^7.0.1",
+    "randomstring": "^1.2.1",
+    "request": "^2.88.2",
+    "request-debug": "^0.2.0",
+    "slugid": "^3.0.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

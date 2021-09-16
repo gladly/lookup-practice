@@ -1,0 +1,6 @@
+customerId,rewardId,rewardName,rewardAmount,orderNumber,status
+1,1,Test,100,123,pending
+2,2,In Store,200,456,pending
+6,3,Platinum Member,700,789,fulfilled
+6,4,Gold Star,500,111,canceled
+6,5,Silver Star,500,222,pending
