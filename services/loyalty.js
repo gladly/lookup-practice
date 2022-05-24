@@ -45,7 +45,7 @@ module.exports.basicLookup = function(lookup) {
         return ((lookupEmail && customer.email == lookupEmail) || (lookupPhone && customer.phone == lookupPhone))
       }), (customer) => {
         results.push({
-          //externalCustomerId: customer.id,
+          externalCustomerId: customer.id,
           emails: customer.email ? [{original: customer.email}] : [],
           phones: customer.phone ? [{original: customer.phone, type: 'MOBILE'}] : [], //MOBILE is the only way that auto-link on phones works; MOBILE is also unique in Gladly
           name: customer.name,
