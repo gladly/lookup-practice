@@ -6,18 +6,15 @@ const express = require('express');
 const basicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser');
 const request = require('request');
+const { logger, validateGladlySignature } = require('./helpers/index');
+
 let app = express();
 
-//Setup Basic authentication
-let basicAuthObj = {
-  users: {}
-};
-const USERNAME = process.env.USERNAME;
-basicAuthObj.users[USERNAME] = process.env.PASSWORD;
-
-//app.use(basicAuth(basicAuthObj));
 app.use(bodyParser.json());
 app.use(bodyParser.raw({ type: () => true }));
+
+app.use(logger);
+app.use(validateGladlySignature);
 
 const lookupRoutes = require('./controllers/loyalty');
 app.use('/', lookupRoutes());

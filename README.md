@@ -1,6 +1,6 @@
 # Background
 
-This repository contains a sample node.js application to demonstrate how to build and configure multiple Lookup Adapters on Gladly with Actions.
+This repository contains a sample node.js application to demonstrate how to build and configure multiple Lookup Adapters on Gladly with Actions. It also demonstrates how to validate the Gladly Signature sent over via each lookup request.
 
 This repository should be used as a tool for **learning** and not as production code!
 
@@ -67,6 +67,7 @@ The CSV files are used as a fake database through which the application can look
 Before you begin, please note the following:
 - **This is for local use only. Do not deploy this application to the real-world.**
 - Never commit passwords or any other sensitive information to this repository
+- This code does NOT validate GET params in requests when calculating signatures (code located in helpers/index.js)
 
 ## Developer setup
 
@@ -84,7 +85,7 @@ This repository uses ngrok to make the Lookup Adapter endpoint publicly accessib
 - Download the ngrok binary to your local machine - you will likely need grant permission to use it in your `System Preferences > Security and Privacy` settings
 
 ### Setting up lookup-practice application
-- Copy the `.env-sample` file into `.env` and update the USERNAME and the PASSWORD settings. For the purposes of this demo, the same USERNAME and PASSWORD settings will be used between both lookup adapters
+- Copy the `.env-sample` file into `.env` and update the GLADLY_SIGNING_KEY settings. For the purposes of this demo, the same GLADLY_SIGNING_KEY settings will be used between both lookup adapters
 - In Terminal, `cd` to this directory (e.g.: `cd ~/Desktop/ps-lookup-practice`)
 - Run `yarn install` in Terminal
 - Run `node orders-sample.js` in Terminal
@@ -101,19 +102,14 @@ All requests and response payloads are logged via `console.log` to your develope
 Sample logs that you may see in your developer console will look like this:
 
 ```
-[2021-08-25 17:28:38] Got POST from Gladly {"lookupLevel":"BASIC","query":{"email":"person1@email.com","id":"594wMEbZSx-RmYSkUMeCPw"},"uniqueMatchRequired":false} for loyalty lookup adapter
+[2022-05-24 09:23:05] Got POST request from Gladly.
+-- Path: /
+-- Body: {"lookupLevel":"BASIC","query":{"emails":["yasir@gladly.com"],"id":"Br1zuiBMTA-daPVl50x45w","name":"Yasir Sadeque"},"uniqueMatchRequired":false}
+-- Headers: {"host":"5d2d-2600-1700-6f80-24b0-7ceb-227d-56f0-6994.ngrok.io","user-agent":"Go-http-client/1.1","content-length":"144","accept":"application/json","accept-encoding":"gzip","authorization":"Basic ZTpl","content-type":"application/json","gladly-authorization":"SigningAlgorithm=hmac-sha256, SignedHeaders=accept;authorization;content-type;gladly-correlation-id;gladly-time;www-authenticate;x-b3-traceid, Signature=763368f56032a74e8eea03d1a0362f70ca9dff5cf10bdbaa1fd16ba70dfd8112","gladly-correlation-id":"XvIZz4Q1R0CZcGbB5pmZig","gladly-time":"20220524T162305Z","www-authenticate":"Basic realm=\"e\"","x-b3-traceid":"5ef219cf84354740997066c1e699998a","x-forwarded-for":"34.227.54.194","x-forwarded-proto":"https"}
 ```
 
 ```
 [2021-08-25 17:28:38][BASIC] Sending results {"results":[{"externalCustomerId":"1","emails":[{"original":"person1@email.com"}],"phones":[{"original":"+14151234567","type":"MOBILE"}],"name":"Person 1","customAttributes":{"points":"100"}}]} for loyalty lookup
-```
-
-```
-[2021-08-25 17:28:41] Got POST from Gladly {"lookupLevel":"DETAILED","query":{"emails":["person1@email.com","hello@gladly.com","person2@email.com"],"externalCustomerId":"1","id":"594wMEbZSx-RmYSkUMeCPw","name":"Person 1","phones":["+14151234567"],"points":"100"},"uniqueMatchRequired":true} for loyalty lookup adapter
-```
-
-```
-[2021-08-25 17:28:41][DETAILED] Sending results {"results":[{"externalCustomerId":"1","emails":[{"original":"person1@email.com"}],"phones":[{"original":"+14151234567","type":"MOBILE"}],"customAttributes":{"points":"100"},"name":"Person 1","transactions":[{"type":"ORDER","name":"Test","amount":"100"}],"actions":[{"name":"A SAMPLE Action on Customer","formUrl":"/action?customer=1"}]}]} for loyalty lookup
 ```
 
 We highly recommend analyzing the logs when utilizing this repository to get familiar with Gladly's request and response formats.
@@ -129,7 +125,8 @@ We highly recommend analyzing the logs when utilizing this repository to get fam
 
 ![](./tutorial-images/loyalty-config-1.png)
 
-- In `Basic Authentication` and `Request Signature` - enter random values. Our Lookup Adapter ignores Auth (not a good practice in the real-world!)
+- In `Basic Authentication` (username, password and realm) - enter random values. Our Lookup Adapter ignores Basic Auth (not a good practice in the real-world!)
+- In `Request Signature`, enter the signing key value to whatever you set up in GLADLY_SIGNING_KEY in the `.env` file you created.
 - In `Customer Linking` add `email` as the attribute and `email` as the label
 
 ![](./tutorial-images/email-email-search.png)
@@ -151,7 +148,8 @@ We highly recommend analyzing the logs when utilizing this repository to get fam
 
 ![](./tutorial-images/order-config-1.png)
 
-- In `Basic Authentication` and `Request Signature` - enter random values. Our Lookup Adapter ignores Auth (not a good practice in the real-world!)
+- In `Basic Authentication` (username, password and realm) - enter random values. Our Lookup Adapter ignores Basic Auth (not a good practice in the real-world!)
+- In `Request Signature`, enter the signing key value to whatever you set up in GLADLY_SIGNING_KEY in the `.env` file you created.
 - In `Customer Linking` add `email` as the attribute and `email` as the label
 
 ![](./tutorial-images/email-email-search.png)
