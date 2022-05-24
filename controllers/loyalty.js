@@ -9,8 +9,6 @@ module.exports = () => {
   const router = express.Router();
 
   router.post('/', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got POST from Gladly ${JSON.stringify(req.body)} for loyalty lookup adapter`);
-
     if(req.body.lookupLevel == 'BASIC') {
       lookupService.basicLookup(req.body)
       .then((customers) => {
@@ -28,8 +26,6 @@ module.exports = () => {
 
   //Render the order action form
   router.get('/action', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got GET request to render Actions form from Gladly ${JSON.stringify(req.query)} for loyalty lookup adapter`);
-
     let form = {
       title: 'SAMPLE Loyalty Action',
       submitButton: 'Do it!',
@@ -44,6 +40,15 @@ module.exports = () => {
         input: {
           type: "text"
         }
+      },{ //you can have as many sections as you'd like
+        type: 'text', //only input-section is allowed for now. think of these as custom inputs / POST parameters for the form being submitted
+        text: "Section 1",
+      },{ //you can have as many sections as you'd like
+        type: 'text', //only input-section is allowed for now. think of these as custom inputs / POST parameters for the form being submitted
+        text: "-----------------------------------",
+      },{ //you can have as many sections as you'd like
+        type: 'text', //only input-section is allowed for now. think of these as custom inputs / POST parameters for the form being submitted
+        text: "Section 2",
       },{ //you can have as many sections as you'd like
         type: 'input', //only input-section is allowed for now. think of these as custom inputs / POST parameters for the form being submitted
         defaultValue: 'asdf',
@@ -62,8 +67,6 @@ module.exports = () => {
   });
 
   router.post('/do/action', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got Actions POST from Gladly with body: ${JSON.stringify(req.body)} and query ${JSON.stringify(req.query)} for loyalty lookup adapter`);
-
     let response = {
       detail: `Conducted a sample action on customer ${req.query.customerId}`,
       message: 'Completed loyalty action'

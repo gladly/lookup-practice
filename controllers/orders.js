@@ -9,8 +9,6 @@ module.exports = () => {
   const router = express.Router();
 
   router.post('/', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got POST from Gladly ${JSON.stringify(req.body)} for orders lookup adapter`);
-
     if(req.body.lookupLevel == 'BASIC') {
       lookupService.basicLookup(req.body)
       .then((customers) => {
@@ -28,8 +26,6 @@ module.exports = () => {
 
   //Render the order action form
   router.get('/action', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got GET request to render Actions form from Gladly ${JSON.stringify(req.query)} for orders lookup adapter`);
-
     let form = {
       title: 'SAMPLE Order Action',
       submitButton: 'Do it!',
@@ -79,8 +75,6 @@ module.exports = () => {
   });
 
   router.post('/do/action', (req, res) => {
-    console.log(`[${dayjs().format('YYYY-MM-DD HH:mm:ss')}] Got Actions POST from Gladly with body: ${JSON.stringify(req.body)} and query ${JSON.stringify(req.query)} for orders lookup adapter`);
-
     let numericValue = req.body['sample-text'].trim();
 
     //This error allows the agent to retry again within the same form

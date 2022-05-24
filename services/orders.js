@@ -79,23 +79,27 @@ module.exports.detailedLookup = function(lookup) {
       //Get a list of rewards
       let orders = [];
       _.each(_.filter(transactions, (transaction) => { return transaction.customerId == lookup.query.externalCustomerId }), (order) => {
-        orders.push({
-          type: 'ORDER',
-          createdAt: order.createdAt,
-          status: order.status,
-          orderNumber: order.id,
-          products: [{ //sample hard-coded products
-            id: '1', //integers must be converted to strings
-            name: 'SAMPLE product',
-            sku: '1',
-            unitPrice: '$10.00',
-            quantity: '1'
-          }],
-          actions: [{
-            name: 'SAMPLE Action!',
-            formUrl: `/action?order=${order.id}`
-          }]
-        });
+
+      });
+
+      orders.push({
+        "type": "GENERIC",
+        "checkInTime": "2021-01-01T00:00:00.000Z",
+        "checkOutTime": "2021-10-01T00:00:00.000Z",
+        "name": "RES 1",
+        "url": "https://www.gladly.com",
+        "title": "Reservation 1",
+        "address": "San Francisco",
+        "neighborhood": "Financial District"
+      }, {
+        "type": "STAY",
+        "checkInTime": "2022-01-01T00:00:00.000Z",
+        "checkOutTime": "2022-10-01T00:00:00.000Z",
+        "name": "RES 2",
+        "url": "https://www.gladly.com",
+        "title": "Reservation 2",
+        "address": "San Francisco",
+        "neighborhood": "Financial District"
       });
 
       const results = {
@@ -109,7 +113,8 @@ module.exports.detailedLookup = function(lookup) {
             ],
             phones: [
               {
-                original: rawCustomerObject[0].phone
+                original: "+16502090271",
+                type: "MOBILE"
               }
             ],
             customAttributes: {
