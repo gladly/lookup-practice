@@ -84,12 +84,25 @@ module.exports.detailedLookup = function(lookup) {
           createdAt: order.createdAt,
           status: order.status,
           orderNumber: order.id,
+          orderStatus: order.status,
+          orderLink: `https://www.google.com`, //sample link - for internal agents
+          currencyCode: 'USD',
+          customerOrderUrl: `https://www.google.com`, //sample link - for customer facing wismo on sidekick
+          note: `This is a sample order note`,
+          itemCount: '1',
           products: [{ //sample hard-coded products
             id: '1', //integers must be converted to strings
             name: 'SAMPLE product',
             sku: '1',
             unitPrice: '$10.00',
-            quantity: '1'
+            quantity: '1',
+            status: 'fulfilled',
+            imageUrl: 'https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=4140&q=80' //sample image
+          }],
+          fulfillments: [{
+            "estimatedDeliveryDate": "2020-08-10T12:00:00.000Z",
+            "trackingUrl": "http://track.dhl-usa.com/TrackByNbr.asp?ShipmentNumber=00064735172",
+            "trackingNumber": "00064735172"
           }],
           actions: [{
             name: 'SAMPLE Action!',
