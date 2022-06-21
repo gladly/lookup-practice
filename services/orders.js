@@ -89,6 +89,7 @@ module.exports.detailedLookup = function(lookup) {
           currencyCode: 'USD',
           customerOrderUrl: `https://www.google.com`, //sample link - for customer facing wismo on sidekick
           note: `This is a sample order note`,
+          itemCount: '1',
           products: [{ //sample hard-coded products
             id: '1', //integers must be converted to strings
             name: 'SAMPLE product',
