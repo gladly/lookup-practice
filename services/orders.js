@@ -84,6 +84,7 @@ module.exports.detailedLookup = function(lookup) {
           createdAt: order.createdAt,
           status: order.status,
           orderNumber: order.id,
+          orderTotal: '$100.00',
           orderStatus: order.status,
           orderLink: `https://www.google.com`, //sample link - for internal agents
           currencyCode: 'USD',
@@ -102,7 +103,8 @@ module.exports.detailedLookup = function(lookup) {
           fulfillments: [{
             "estimatedDeliveryDate": "2020-08-10T12:00:00.000Z",
             "trackingUrl": "http://track.dhl-usa.com/TrackByNbr.asp?ShipmentNumber=00064735172",
-            "trackingNumber": "00064735172"
+            "trackingNumber": "00064735172",
+            "productIds": ["1"]
           }],
           actions: [{
             name: 'SAMPLE Action!',
