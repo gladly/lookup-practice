@@ -104,7 +104,8 @@ module.exports.detailedLookup = function(lookup) {
             "estimatedDeliveryDate": "2020-08-10T12:00:00.000Z",
             "trackingUrl": "http://track.dhl-usa.com/TrackByNbr.asp?ShipmentNumber=00064735172",
             "trackingNumber": "00064735172",
-            "productIds": ["1"]
+            "productIds": ["1"],
+            "status": "delivered"
           }],
           actions: [{
             name: 'SAMPLE Action!',
