@@ -11,7 +11,7 @@
     "csvtojson": "^2.0.10",
     "dayjs": "^1.10.6",
     "dotenv": "^16.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-basic-auth": "^1.2.0",
     "hmac-express": "^1.4.0",
     "lodash": "^4.17.21",
