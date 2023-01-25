@@ -47,7 +47,7 @@ module.exports.basicLookup = function(lookup) {
         results.push({
           externalCustomerId: customer.id,
           emails: customer.email ? [{original: customer.email}] : [],
-          phones: customer.phone ? [{original: customer.phone, type: 'MOBILE'}] : [], //MOBILE is the only way that auto-link on phones works; MOBILE is also unique in Gladly
+          phones: customer.phone ? [{original: customer.phone, type: 'MOBILE'}] : [], //MOBILE numbers are considered unique in Gladly. To auto-link, phone number type has to be set to MOBILE in either the lookup adpator OR within the Gladly Customer Profile AND phone number in lookup adaptor response has to match the phone number in Gladly Customer Profile.
           name: customer.name,
           customAttributes: {
             points: customer.points
