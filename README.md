@@ -78,11 +78,8 @@ This repository uses node.js and yarn in this repository to run our code
 - Install [node](https://nodejs.org/tr/download/package-manager/) using Homebrew
 - Install [yarn](https://formulae.brew.sh/formula/yarn)
 
-### ngrok
-This repository uses ngrok to make the Lookup Adapter endpoint publicly accessible
-- Create an account on [ngrok](https://dashboard.ngrok.com/signup) if you don't already have one
-- Go [here](https://dashboard.ngrok.com/get-started/setup) and follow the instructions in Step 1 & 2 to install `ngrok`
-- Download the ngrok binary to your local machine - you will likely need grant permission to use it in your `System Preferences > Security and Privacy` settings
+### localtunnel
+To make the Lookup Adapter endpoints accessible from Gladly, the instructions below use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your localhost to the internet. You can also use a tool like [ngrok](https://ngrok.com/) if you prefer.
 
 ### Setting up lookup-practice application
 - Copy the `.env-sample` file into `.env` and update the GLADLY_SIGNING_KEY settings. For the purposes of this demo, the same GLADLY_SIGNING_KEY settings will be used between both lookup adapters
@@ -92,9 +89,9 @@ This repository uses ngrok to make the Lookup Adapter endpoint publicly accessib
 - Open a new tab in Terminal
 - Run `node loyalty-sample.js` in Terminal
 - Open a new tab in Terminal
-- Run `ngrok http 6000` in Terminal. This will output an https link. Let's call this URL Loyalty
+- Run `npx localtunnel --port 6000` in Terminal. This will output an https link. Let's call this URL Loyalty
 - Open a new tab in Terminal
-- Run `ngrok http 7000` in Terminal. This will output an https link. Let's call this URL Orders
+- Run `npx localtunnel --port 7000` in Terminal. This will output an https link. Let's call this URL Orders
 
 ### Viewing request and response logs
 All requests and response payloads are logged via `console.log` to your developer console.
